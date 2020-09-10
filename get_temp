@@ -1,0 +1,22 @@
+timeout 100
+
+print "GetTemp"
+send "i"
+send "m"
+send "1" 
+sleep 6
+print "Pomiar"
+send "T"
+send "A"
+send "q"
+
+killminicom:
+  expect {
+    "Enter Selection:" break
+    timeout 4  goto panic
+  }
+  ! killall -1 minicom
+
+panic:
+  ! killall -1 minicom
+
